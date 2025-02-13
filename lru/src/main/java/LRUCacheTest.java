@@ -13,10 +13,4 @@ public class LRUCacheTest{
         System.out.println(cache); 
     }
 
-
-
-
-
-
-
 }
