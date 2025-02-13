@@ -57,36 +57,36 @@ public class LFUcache < K,V >{
         // adiciona dentro das frequencia a quantas vezes a chave foi acessada
         frequency.put(key,1);
 
-
-        frequencyGroups.existeFrequencia1(key);
+        // verifico se 1 existe no grupo de frequencia
+        existeFrequencia(1,key);
+        minFrequency = 1;
 
     }
 
-    private void existeFrequencia1(K key){
+    private void existeFrequencia(int i,K key){
         
-        if(!frequencyGroups.containsKey(1)){
-            frequencyGroups.put(1, new LinkedHashSet<K>());
-            minFrequency = 1;
+        if(!frequencyGroups.containsKey(i)){
+            frequencyGroups.put(i, new LinkedHashSet<K>());
         }
-        frequencyGroups.get(1).add(key);
+        frequencyGroups.get(i).add(key);
     }
 
     private void atualizaFrequencia(K key) {
         int frequencia =  frequency.get(key);
         
+        // incremento o valor diretamente no hashMap de frequencia
         frequency.put(key, frequencia + 1);
-
+        
+        // remove do grupo de frequencia anterior a chave
         frequencyGroups.get(frequencia).remove(key);
 
-        // preciso verificar se a frequencia 
+        // se minha frequencia for a menor, e meu grupo de frequencia estiver vazio para a frequencia anterior 
+        // eu adiciono 1 na menor frequencia e removo ela do grupo de frequencia
         if (frequencia == minFrequency && frequencyGroups.get(frequencia).isEmpty()) {
+            frequencyGroups.remove(frequencia);
             minFrequency++;
-            frequencyGroups.remove(frequencia); 
-
         }
-        
-        frequencyGroups.computeIfAbsent(frequencia + 1, k -> new LinkedHashSet<>()).add(key);
-
+        existeFrequencia(frequencia + 1, key);
     }
 
     private void excluirItem() {
@@ -98,7 +98,7 @@ public class LFUcache < K,V >{
         K chaveRemovida = grupoMenorFrequencia.iterator().next();
 
         grupoMenorFrequencia.remove(chaveRemovida);
-
+        
         if (grupoMenorFrequencia.isEmpty()){
             // eu preciso tratar alguma coisa aqui ?
             frequencyGroups.remove(minFrequency);
