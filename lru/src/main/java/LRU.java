@@ -44,7 +44,7 @@ public class LRU<K, V> {
     
     // verificar se isso pode ser mantido!!!!!!
     // verifica se o dado procurado está no cache
-    public Object get(K key) {
+    public V get(K key) {
         if (cache.containsKey(key)) {
             // caso no qual houve um cache hit e temos que mover o nó para frente.
             Node<K, V> cacheHit = cache.get(key);
@@ -52,7 +52,7 @@ public class LRU<K, V> {
             return cacheHit.value;
         }
         // já nesse caso, houve um cache miss, pois não achamos aquela chave no cache.
-        return -1; 
+        return null; 
     }
     
     // esse método é responsável por adicionar/remover ou mover nós baseado em cache hit or miss
