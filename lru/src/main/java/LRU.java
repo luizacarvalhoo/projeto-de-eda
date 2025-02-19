@@ -61,6 +61,7 @@ public class LRU<K, V> {
         if (cache.containsKey(key)) {
             // como o dado já se encontra no cache, temos que atualizar sua frequência
             Node<K, V> cacheHit = cache.get(key);
+            cacheHit.value = value;  // atualiza o valor do nó
             moveMostRecentlyUsedNode(cacheHit); // move o nó para frente da dll
         } else {
             // verifica se a capacidade do cache foi atingida
