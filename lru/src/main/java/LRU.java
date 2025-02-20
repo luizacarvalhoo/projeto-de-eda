@@ -44,14 +44,13 @@ public class LRU<K, V> {
         addNode(node);
     }
     
-    // verificar se isso pode ser mantido!!!!!!
     // verifica se o dado procurado está no cache
     public V get(K key) {
         if (this.cache.containsKey(key)) {
             // caso no qual houve um cache hit e temos que mover o nó para frente.
-            Node<K, V> cacheHit = this.cache.get(key);
-            moveMostRecentlyUsedNode(cacheHit); // move o nó para frente da dll
-            return cacheHit.value;
+            Node<K, V> node = this.cache.get(key);
+            moveMostRecentlyUsedNode(node); // move o nó para frente da dll
+            return node.value;
         }
         // já nesse caso, houve um cache miss, pois não achamos aquela chave no cache.
         return null; 
@@ -62,12 +61,12 @@ public class LRU<K, V> {
 
         if (this.cache.containsKey(key)) {
             // como o dado já se encontra no cache, temos que atualizar sua frequência
-            Node<K, V> cacheHit = this.cache.get(key);
-            cacheHit.value = value;  // atualiza o valor do nó
-            moveMostRecentlyUsedNode(cacheHit); // move o nó para frente da dll
+            Node<K, V> node = this.cache.get(key);
+            node.value = value;  // atualiza o valor do nó
+            moveMostRecentlyUsedNode(node); // move o nó para frente da dll
         } else {
             // verifica se a capacidade do cache foi atingida
-            if ((cache.size() + 1) > capacity) {
+            if (this.cache.size() == capacity) {
 
                 // capacidade máxima atingida e nó LRU é removido do cache para que o novo nó possa ser adicionado
                 Node<K, V> leastRecentlyUsed = this.tail.prev;
