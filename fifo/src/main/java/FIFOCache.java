@@ -7,7 +7,9 @@ public class FIFOCache {
     private int hit;        
     private int miss;       
 
-    
+//tirar hit e miss
+//put e get  mudar 
+	
     public FIFOCache(int capacity) {
         this.capacity = capacity;
         this.cache = new T[capacity];
@@ -112,7 +114,7 @@ public class FIFOCache {
     
     public T removeFirst() {
         String retorno = "";
-        if (estaVazio()) throw new IllegalArgumentException("Cache vazio.");
+        if (isEmpty()) throw new IllegalArgumentException("Cache vazio.");
 		       
 		T removedItem = this.cache[this.head];
         if (this.head == this.tail) {
