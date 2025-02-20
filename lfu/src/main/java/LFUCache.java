@@ -1,7 +1,6 @@
 import java.util.*;
 
-public class LFUcache < K,V >{
-
+public class LFUCache < K,V >{
 
     // Limita o tamanho do cache.
     private int capacity;
@@ -17,7 +16,6 @@ public class LFUcache < K,V >{
 
     // a menor frequencia atual
     private int minFrequency;
-
 
     public LFUcache(int capacity){
         this.capacity = capacity;
