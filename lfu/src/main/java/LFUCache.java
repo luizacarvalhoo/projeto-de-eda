@@ -17,7 +17,7 @@ public class LFUCache < K,V >{
     // a menor frequencia atual
     private int minFrequency;
 
-    public LFUcache(int capacity){
+    public LFUCache(int capacity){
         this.capacity = capacity;
         this.cache = new HashMap<>();
         this.frequency = new HashMap<>();
