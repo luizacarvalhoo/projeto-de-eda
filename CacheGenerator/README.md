@@ -1,3 +1,6 @@
+https://github.com/UMass-LIDS/Jedi?tab=readme-ov-file#6-available-traffic-models
+
+
 1 -instalar as dependencias na pasta do JEDI, é so executar no cli
 	>>pip3 install numpy scipy pyQt5 datetime matplotlib pathos
 
