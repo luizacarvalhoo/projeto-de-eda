@@ -5,9 +5,13 @@ import java.io.InputStreamReader;
 
 // como ta baseado no Main do comeco do periodo talvez precise de mudanca
 public class main {
-    
-    
+    private int miss;
+    private int hit;
     public static void main(String[] args) {
+        this.hit = 0;
+        this.miss = 0;
+
+        
         //ter 3 main um para cada politica ou colocar os 3 aqui?
 
         FIFOCache fifoCache = new FIFOCache(100);
@@ -31,7 +35,11 @@ public class main {
                 long endAddElement = System.nanoTime();
                 
                 long startContainsElement = System.nanoTime();
-                fifoCache.contains(line);
+                if(fifoCache.contains(line)){
+                    this.hit++;
+                }else{
+                    this.miss++;
+                };
                 long endContainsElement = System.nanoTime();
                 
                 long timeAddElement = endAddElement - startAddElement;
@@ -45,8 +53,8 @@ public class main {
             }
 
             
-            System.out.println("Hits: " + fifoCache.getHit());
-            System.out.println("Misses: " + fifoCache.getMiss());
+            System.out.println("Hits: " + this.hit);
+            System.out.println("Misses: " +this.miss);
             System.out.println("Conteúdo do Cache:\n" + fifoCache.toString());
 
             // botar taxa hit/miss?
