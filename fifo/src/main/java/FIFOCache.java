@@ -1,14 +1,11 @@
-public class FIFOCache {
+public class FIFOCache<T> {
     private T[] cache;  
     private int capacity; 
     private int head;       
     private int tail;       
     private int size;    
-    private int hit;        
-    private int miss;       
+      
 
-//tirar hit e miss
-//put e get  mudar 
 	
     public FIFOCache(int capacity) {
         this.capacity = capacity;
@@ -16,8 +13,7 @@ public class FIFOCache {
         this.head = -1;
         this.tail = -1;
         this.size = 0;
-        this.hit = 0;
-        this.miss = 0;
+
     }
     
 
@@ -28,16 +24,6 @@ public class FIFOCache {
 
     public boolean isFull() {
     return ((this.tail + 1) % this.capacity) == this.head;
-    }
-    
-    
-    public int getHit(){
-        return this.hit;
-    }
-
-
-    public int getMiss(){
-        return this.miss;
     }
     
     
@@ -78,14 +64,14 @@ public class FIFOCache {
         int i = this.head;
         while (true) {
             if (cache[i].equals(item)) {
-                this.hit++; 
+             
                 return true;
             }
             if (i == this.tail) break;
             i = (i + 1) % this.capacity;
         }
 
-        this.miss++; 
+         
         return false;
     }
     
